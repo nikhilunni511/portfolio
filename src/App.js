@@ -1,18 +1,39 @@
-import React from 'react';
-import './App.css';
-// import {About} from './components/folders/About'
-import DragAbout from './components/folders/dragAbout';
+import React from "react";
+import "./App.css";
+import { Desktop } from "./components/main";
+import { Explorer } from "./components/explorer/explorer";
+import { MyProvider } from "./MyProvider";
 
-function App() {
-  return (
-    <div className="App">
-      <div className="desktop">
-        {/* <About/> */}
-        <DragAbout folderName="Home"/>
-        <DragAbout folderName="About"/>
-      </div>
-    </div>
-  );
+export default class App extends React.Component {
+
+  update = (enable, folderName) => {
+    this.setState({showExplorer: enable, folder: folderName})
+  }
+  state={
+    showExplorer: false,
+    folder: '',
+    updateState: this.update
+  }
+  
+  render() {
+    return (
+        <div className="App" id="portfolio">
+          <Desktop showExplorer = {this.state}/>
+          <Explorer showExplorer = {this.state}/>
+        </div>
+    );
+  }
 }
 
-export default App;
+// const App = () => {
+//   return (
+//     <MyProvider>
+//       <div className="App" id="portfolio">
+//         <Desktop />
+//         <Explorer />
+//       </div>
+//     </MyProvider>
+//   );
+// };
+
+// export default App;
